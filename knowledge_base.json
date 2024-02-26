@@ -68,7 +68,13 @@
       
     }
   ]
-    }
+    },
+    "db_name": "oms",
+    "tables": [
+      "table_name": "suborder_transaction_debit_history_vw",
+      "table_definition":" "
+    ]
+    
 ]
   
   
