@@ -79,9 +79,162 @@
       ]
       
     }
+
+  ]
+    },
+{
+  "db_name" : "analytics_logistics",
+      "tables" : [
+        {
+          "table_name": "rto_basedata_ys_v4",
+          "table_definition" : "It contains data related to UD(undelivered), and RTO suborders. This table is used after the suborders are OFD(out for delivery).",
+          "columns": [
+            {
+               "column_name": "status_date",
+      "definition": "The timestamp when the current status was marked.	"
+    },
+    {
+      "column_name": "code",
+      "definition": "This column stores the UD reason/code (why the suborder was marked undelivered) when the status is 'UDL'.",
+"distinct_values": [
+{
+          "code": "UD_AI",
+          "remarks": [
+            "The courier boy was not able to find the address mentioned",
+            "Address Issues"
+          ]
+        },
+        {
+          "code": "UD_CSP",
+          "remarks": [
+            "When the customer directly collects an order from the warehouse.",
+            "Customer Self Pickup"
+          ]
+        },
+        {
+          "code": "UD_CD",
+          "remarks": [
+            "The customer refused to accept the order.",
+            "Customer_denial"
+          ]
+        },
+        {
+          "code": "UD_CNR",
+          "remarks": [
+            "The customer was not ready with the cash.",
+            "Cash Not Ready"
+          ]
+        },
+        {
+          "code": "UD_ODA",
+          "remarks": [
+            "The given address was out of reach of the courier group.",
+            "Out of Delivery Area"
+          ]
+        },
+        {
+          "code": "UD_CR",
+          "remarks": [
+            "The customer refused to accept the order.",
+            "Customer Refusal"
+          ]
+        },
+        {
+          "code": "UD_CNA",
+          "remarks": [
+            "The customer was not available at the given address",
+            "Customer Not Available"
+          ]
+        },
+        {
+          "code": "UD_SD",
+          "remarks": [
+            "Delay from the courier side.",
+            "Shipper Delay"
+          ]
+        },
+        {
+          "code": "UD_CROTP",
+          "remarks": [
+            "This code is marked when the customer doesn't want the product so the customer gives the OTP to the courier boy and he marks the order as RTO(return to origin)",
+            "Customer Refusal OTP"
+          ]
+        },
+        {
+          "code": "UD_MISC",
+          "remarks": [
+            "Some miscellaneous reasons",
+            "Miscellaneous"
+          ]
+        }
+],
+
+      "remarks": [
+        "The value is null when the suborder status is 'DEL' or 'RTO' ",
+        "Use these columns when asked about undelivered reasons.
+"
+      ]
+    },
+    {
+      "column_name": "courier_group",
+      "definition": "This column stores the courier group of the suborder. There are various courier groups.",
+      "remarks": [
+        "Ignore null value"
+      ]
+    },
+    {
+      "column_name": "subo_shipping_method_code",
+      "definition": "This column stores the payment mode of the suborder. It can be cash on delivery or prepaid.",
+      "remarks": [
+        "When counting tickets, use the casenumber from the salesforce table.",
+        "For counting the total tickets created in a day or any specific period, you should use COUNT(DISTINCT casenumber) to ensure each ticket is counted once regardless of how many updates or changes it may have undergone during its lifecycle."
+      ]
+    },
+    {
+      "column_name": "suborder_code",
+      "definition": "This column stores a unique identifier for a suborder, in contexts where orders can be broken down into smaller parts (suborders), each with specific tracking and management needs. This column is used as a Foreign Key for suborder details.",
+   
+      "remarks": [
+        "used as a foreign key for suborder details"
+      
+      ]
+    },
+    {
+      "column_name": "status",
+      "definition": "Code representing the current status of the suborder (e.g., pending, shipped, delivered).",
+ "distinct_values":[
+    { "status": "UDL",
+     "Remarks": "Undelivered"},
+{ "status": "RTO",
+     "Remarks": "Return to Origin"},
+{ "status": "DEL",
+     "Remarks": "Delivered"},
+{ "status": "Lost"
+},
+{ "status": "ITR"
+}
+       ],
+      "remarks": [
+        "Use RTO when asked about RTO suborders.",
+        "Used UDL when asked about undelivered suborders",
+"Use Del when asked about delivered suborders."
+      ]
+    },
+    {
+      "column_name": "ranking",
+      "definition": "This column gives the attempt number for that particular suborder code.",
+      "remarks": [
+        "Indicates the attempt number."
+      ]
+        }
+      ]
+      
+    }
+
   ]
     }
     
+  
 ]
   
   
