@@ -380,6 +380,182 @@
         }
       ]
       
+    },
+ {
+          "table_name": "order_transaction_vw",
+          "table_definition" : "This table stores Order transaction-related details. This is used to identify payment modes for a suborder.",
+  "columns": [
+    {
+      "column_name": "order_id",
+      "definition": "Identifier linking the suborder to its parent order."
+    },
+    {
+      "column_name": "code",
+      "definition": "This column stores a unique identifier for a suborder in contexts where orders can be broken down into smaller parts (suborders) each with specific tracking and management needs. This column is used as a Foreign Key for suborder details."
+    },
+    {
+      "column_name": "payment_mode",
+      "definition": "Method of payment. The distinct values are provided in the Sample Data column.",
+  "distinct_values": [
+    {
+      "code": "me",
+      "remarks": ["EMI"]
+    },
+    {
+      "code": "mu",
+      "remarks": ["UPI"]
+    },
+    {
+      "code": "du",
+      "remarks": ["UPI"]
+    },
+    {
+      "code": "em",
+      "remarks": ["EMI"]
+    },
+    {
+      "code": "md",
+      "remarks": ["Debit Card"]
+    },
+    {
+      "code": "mn",
+      "remarks": ["Net Banking"]
+    },
+    {
+      "code": "cd",
+      "remarks": ["Cash On Delivery"]
+    },
+    {
+      "code": "sd",
+      "remarks": ["SD Cash"]
+    },
+    {
+      "code": "nb",
+      "remarks": ["Net Banking"]
+    },
+    {
+      "code": "pl",
+      "remarks": ["Payment Link through RAZORAPAY"]
+    },
+    {
+      "code": "oc",
+      "remarks": ["Ondc payment mode"]
+    },
+    {
+      "code": "mc",
+      "remarks": ["Credit Card"]
+    },
+    {
+      "code": "gv",
+      "remarks": ["e-Gift Voucher"]
+    },
+    {
+      "code": "sc",
+      "remarks": ["Snapcash Wallet"]
+    },
+    {
+      "code": "jp",
+      "remarks": ["Juspay SDK"]
+    },
+    {
+      "code": "nw",
+      "remarks": ["Wallet"]
+    },
+    {
+      "code": "rv",
+      "remarks": ["Refund Voucher"]
+    },
+    {
+      "code": "dc",
+      "remarks": ["Debit Card"]
+    },
+    {
+      "code": "cc",
+      "remarks": ["Credit Card"]
+    }
+  ],
+      "remarks": [
+        "This column is used when asked about payment_mode related problems.",
+        "There can be multiple payment modes on a single code (which is the same as a suborder_code)."
+      ]
+    },
+    {
+      "column_name": "payment_gateway_id",
+      "definition": "Identifier for the payment gateway used to process the transaction."
+    },
+    {
+      "column_name": "payment_amount",
+      "definition": "The total amount paid in the transaction."
+    },
+    {
+      "column_name": "payment_status_code",
+      "definition": "Code representing the status of the payment (e.g., successful, failed, pending).",
+"distinct_values" : [
+{
+"code":"CRD",
+"remarks": ["Created"]
+},
+{
+"code":"ATH",
+"remarks": ["Authorized"]
+},
+{
+"code":"TMT",
+"remarks": ["Timeout"]
+},
+{
+"code":"FLD",
+"remarks": ["Failed"]
+},
+{
+"code":"PVF",
+"remarks": ["Pending Verification"]
+}
+]
+    },
+    {
+      "column_name": "captured",
+      "definition": "Indicates whether the payment gateway has successfully captured the payment amount."
+    },
+    {
+      "column_name": "created",
+      "definition": "Timestamp when the transaction record was created."
+    },
+    {
+      "column_name": "updated",
+      "definition": "Timestamp when the transaction record was last updated."
+    },
+    {
+      "column_name": "mobile",
+      "definition": "Mobile number associated with the transaction or user."
+    },
+    {
+      "column_name": "user_id",
+      "definition": "Identifier for the user who initiated the transaction. Unique id for each user."
+    },
+    {
+      "column_name": "email",
+      "definition": "Email address of the user associated with the transaction."
+    },
+    {
+      "column_name": "order_code",
+      "definition": "A unique identifier or code for the order possibly used for tracking or customer service purposes."
+    },
+    {
+      "column_name": "customer_name",
+      "definition": "Name of the customer who placed the order."
+    },
+    {
+      "column_name": "ims_user_id",
+      "definition": "Identifier for the user within an Inventory Management System (IMS) if integrated with the OMS. This is used as user identifier and unique to each user."
+    },
+    {
+      "column_name": "store_front",
+      "definition": "Identifier or name of the storefront or sales channel through which the order was placed. The distinct values are provided in the sample data column."
+}
+]
+         
+      
     }
 
   ]
