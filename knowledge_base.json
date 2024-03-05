@@ -232,6 +232,157 @@
     }
 
   ]
+    },
+{
+ "db_name": "oms",
+      "tables" : [
+        {
+          "table_name": "suborder",
+          "table_definition" : "This table stores data related to each suborder. The 'code' is a unique code for each suborder. This code is used to join with other tables having a suborder_code column. Used to count Rejected orders, Duplicate orders, and suborder count. Commonly joined with sale_order to find user id(user_id).",
+          "columns": [
+            {
+               "column_name": "id",
+      "definition": "Unique identifier for each suborder record."
+    },
+    {
+      "column_name": "order_id",
+      "definition": "Identifier linking the suborder to its parent order.",
+      "remarks": [
+        "This column is used for joining with sale_order_vw (id)."
+      ]
+    },
+    {
+      "column_name": "vendor_code",
+      "definition": "Code identifying the vendor or supplier of the item."
+    },
+    {
+      "column_name": "supc",
+      "definition": "Stock-keeping unit (SKU) unique product code for item identification.",
+      "remarks": [
+        "Used to identify duplicate orders."
+      ]
+    },
+    {
+      "column_name": "code",
+      "definition": "This column stores a unique identifier for a suborder, in contexts where orders can be broken down into smaller parts (suborders), each with specific tracking and management needs. This column is used as a Foreign Key for suborder details.",
+     
+      "remarks": [
+        "used as a foreign key for suborder details"
+      ]
+    },
+    {
+      "column_name": "status_code",
+      "definition": "Code representing the current status of the suborder (e.g., pending, shipped, delivered).",
+   "distinct_values": [
+    {
+      "code": "CFA",
+      "remarks": ["Suborder closed for alternate product"]
+    },
+    {
+      "code": "REJ",
+      "remarks": ["Rejected"]
+    },
+    {
+      "code": "AIP",
+      "remarks": ["Alternate in progress"]
+    },
+    {
+      "code": "HLD",
+      "remarks": ["Hold at shipping"]
+    },
+    {
+      "code": "FLD",
+      "remarks": ["Failed"]
+    },
+    {
+      "code": "CFP",
+      "remarks": ["Closed for prepaid"]
+    },
+    {
+      "code": "RIP",
+      "remarks": ["Rejection"]
+    },
+    {
+      "code": "CFS",
+      "remarks": ["Closed in lieu of a secondary suborder i.e. either reshipped, replaced, or alternate suborder"]
+    },
+    {
+      "code": "RTN",
+      "remarks": ["Returned"]
+    },
+    {
+      "code": "CLD",
+      "remarks": ["Cancelled"]
+    },
+    {
+      "code": "VDL",
+      "remarks": ["Service is Delivered"]
+    },
+    {
+      "code": "CIP",
+      "remarks": ["Cancellation in progress"]
+    },
+    {
+      "code": "CVR",
+      "remarks": ["Suborder is closed for vendor reallocation to create a secondary suborder"]
+    },
+    {
+      "code": "INI",
+      "remarks": ["Suborder Initiated i.e. order created"]
+    },
+    {
+      "code": "CRD",
+      "remarks": ["Created"]
+    },
+    {
+      "code": "PVF",
+      "remarks": ["Pending for Verification"]
+    },
+    {
+      "code": "WFF",
+      "remarks": ["Pending Fulfillment i.e. to be enqueued"]
+    },
+    {
+      "code": "FIP",
+      "remarks": ["Failed in Progress"]
+    }
+  ],
+      "remarks": [
+        "When writing queries ,always remember to remove 'FLD' orders using status_code.",
+        "These status codes are before the order is shipped",
+"PVF , CRD , REJ , CLD,FLD are commonly used from this column."
+      ]
+    },
+    {
+      "column_name": "paid_amount",
+      "definition": "The total amount paid by the customer for the suborder."
+        },
+{
+      "column_name": "shipping_method_code",
+      "definition": "Code identifying the shipping method used for the suborder.",
+"distinct_values": [
+{
+          "code": "STD",
+          "remarks": [
+            "Prepaid"
+          ]
+        },
+        {
+          "code": "COD",
+          "remarks": [
+        "Cash on Delivery"
+          ]
+        }
+],
+"remarks" : [
+"Online paid orders are called prepaid orders."
+]
+        }
+      ]
+      
+    }
+
+  ]
     }
     
   
