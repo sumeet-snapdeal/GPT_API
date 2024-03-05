@@ -20,8 +20,8 @@
       "column_name": "createddate",
       "definition": "Records the date and time when the ticket was created in the system. This timestamp is essential for tracking the case's lifecycle, understanding response times, and managing SLAs (Service Level Agreements).",
       "remarks": [
-        "Use this date when queries about tickets created/closed are asked.",
-        "This column is already in date format so no need to cinvert it to any other form."
+        "Use this date when queries about tickets created/closed are asked." ,
+        "This column is already in date format so no need to convert it to any other form."
       ]
     },
     {
@@ -42,6 +42,18 @@
     {
       "column_name": "status",
       "definition": "Reflects the current state of the case, typically indicating whether it is open, meaning active and under investigation or resolution, or closed, meaning the issue has been resolved to the customer's satisfaction or otherwise concluded. This status is key for managing the workflow of cases and prioritizing actions.",
+      "distinct_values":[
+    { "status": "Customer Updated",
+     "Remarks": "Considered as open"},
+{ "status": "Pending with Snapdeal",
+     "Remarks": "Considered as open"},
+{ "status": "Closed",
+     "Remarks": "Considered as Closed"},
+{ "status": "Pending",
+     "Remarks": "Considered as open"},
+{ "status": "Open",
+     "Remarks": "Considered as open"}
+       ],
       "remarks": [
         "Always take status in the LOWER case when comparing it with a string.",
         "Status is 'closed' for closed tickets.",
@@ -68,12 +80,7 @@
       
     }
   ]
-    },
-    "db_name": "oms",
-    "tables": [
-      "table_name": "suborder_transaction_debit_history_vw",
-      "table_definition":" "
-    ]
+    }
     
 ]
   
