@@ -980,7 +980,99 @@
       ]
     }
   ]
+},
+{
+"table_name":"f_shipping_package_vw",
+"table_definition": "This is a view that contains data regarding the shipping details of the suborder. Details like if the package is shipped, manifested, delivered, and the date when it was shipped, manifested, and delivered respectively. This table should be JOINED after the dwh.f_suborders_oms_vw (alias - fso) and used to check if the suborder is shipped or not.",
+  "columns": [
+    {
+      "column_name": "sp_shipping_package_id",
+      "definition": "The primary key for the table uniquely identifies each package in the system. It is crucial for tracking individual shipments and linking related data across the database.",
+      "remarks": [
+        "This column is used to join with table dwh.f_suborders_oms_vw (alias - fso).",
+        "For reference: dwh.f_suborders_oms_vw JOIN dwh.f_shipping_package_vw fsp ON fso.soi_shipping_package_id = fsp.sp_shipping_package_id"
+      ]
+    },
+    {
+      "column_name": "sph_date_shipped",
+      "definition": "This column records the date when the package was shipped.",
+      "remarks":[ " Use this field to get the shipped date for the suborder.", "If this field is null, it indicates suborder_code is not shipped.",
+"Convert this field in YYYY-MM-DD format using -
+to_date(sph_date_shipped::varchar,'YYYYMMDD')"
+]
+    },
+    {
+      "column_name": "sph_date_delivered",
+      "definition": "This column records the date when the package was delivered.",
+"Remarks": [
+"Convert this field in YYYY-MM-DD format using -
+to_date(sph_date_shipped::varchar,'YYYYMMDD')"
+]
+    },
+    {
+      "column_name": "sp_tracking_number",
+      "definition": "This number helps to track the shipment's progress through the carrier's system.",
+      "remarks": [
+        "It is the tracking number assigned to the suborder which is used in tracking the journey of the suborder.",
+        "It can also be referred to as awb_number."
+      ]
+    },
+    {
+      "column_name": "sd_state",
+      "definition": "This column stores the state of the shipping destination address."
+    },
+    {
+      "column_name": "sd_pincode",
+      "definition": "This column stores the pin code of the shipping destination address."
+    },
+    {
+      "column_name": "sd_name",
+      "definition": "This column stores the customer name."
+    },
+    {
+      "column_name": "sd_mobile",
+      "definition": "This column holds the mobile phone number of the package recipient."
+    },
+    {
+      "column_name": "sd_email",
+      "definition": "This column holds the email address of the shipping package recipient. It is essential for digital communication, enabling the shipping company or vendor to send order confirmations, shipping notifications, tracking updates, delivery schedules, and any changes or issues regarding the shipment directly to the recipient."
+    },
+    {
+      "column_name": "sd_city",
+      "definition": "This column stores the name of the city for the shipping destination address."
+    },
+    {
+      "column_name": "sd_address_line2",
+      "definition": "This column stores the second line of the recipient's address.",
+ "Remarks":
+[
+ "Data is stored in encrypted form."
+]
+    },
+    {
+      "column_name": "sd_address_line1",
+      "definition": "This column stores the first line of the recipient's address.",
+ "Remarks":
+[
+ "Data is stored in encrypted form."
+]
+    },
+    {
+      "column_name": "sp_total_paid_amount",
+      "definition": "The total amount paid by the customer."
+    },
+    {
+      "column_name": "sp_collectable_amount",
+      "definition": "The cash-on-delivery amount."
+    },
+    {
+      "column_name": "sp_expected_delivery_date",
+      "definition": "This column stores the date when the package is expected to be delivered to the recipient.",
+     
+    }
+  ]
 }
+
 
 ]
 }
