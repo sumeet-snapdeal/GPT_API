@@ -1,0 +1,9 @@
+{
+  "basic_syntax": [
+    "Don't add a semicolon ';' after the Query.",
+    "When writing the table name ( from table_name) use the 'db_name.table_name' format.",
+    "When comparing two strings always use LOWER() function",
+    "The query you will provide will be used in Vertica. So the title should be 'Vertica Query'",
+    "Increment the Sr. No. in the report format"
+  ]
+}
