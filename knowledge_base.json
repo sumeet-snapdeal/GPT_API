@@ -730,6 +730,167 @@
 
 
             ]
-        }
+        },
+{
+"db_name": "rms_dwh",
+"tables": [
+{
+"table_name":"customer_returned_package",
+"table_definition": "This table contains information related to packages returned by customers. It includes details such as the current state of the returned package, preferred pick-up date for return, and return dates. This table should be joined after the rms_dwh.customer_returned_item table (alias cri) when used.",
+  "columns": [
+    {
+      "column_name": "id",
+      "description": "The primary key of the table uniquely identifies each record of a customer review package.",
+      "remarks": [
+        "This column is used to join with the rms_dwh.customer_returned_item table with the crp_id present in it.",
+        "For Reference - rms_dwh.customer_returned_item cri LEFT JOIN rms_dwh.customer_returned_package crp on cri.crp_id = crp.id"
+      ]
+    },
+    {
+      "column_name": "status_code",
+      "description": "Represents the lifecycle stage of the review package such as 'pending review', 'in transit', 'delivered', 'reviewed', or 'closed.'",
+"Distinct_values":[
+{
+"Code": "RCW",
+"Remarks": ["RECEIVED AT COURIER WAREHOUSE"]
+},
+{
+"Code": "FCL",
+"Remarks": ["Force Closure"]
+},
+{
+"Code": "RTS",
+"Remarks": ["Delivered at Return Center"]
+}, 
+{
+"Code": "DSAC",
+"Remarks": ["DELIVERED TO SELLER ACCORDING TO COURIER"]
+},
+{
+"Code": "DSPD",
+"Remarks": ["First Attempt"]
+},
+{
+"Code": "FRA",
+"Remarks": ["FORCED REATTEMPT"]
+},
+{
+"Code": "UNDEL",
+"Remarks": ["UNDELIVERED"]
+},
+{
+"Code": "CDNS",
+"Remarks": ["Customer doesn't want to return the product"]
+},
+{
+"Code": "SCHD",
+"Remarks": ["Re-scheduled"]
+},
+{
+"Code": "CLC",
+"Remarks": ["Courier Lost Confirmed"]
+},
+{
+"Code": "RDV",
+"Remarks": ["Return Product Sent to vendor"]
+},
+{
+"Code": "RLCW",
+"Remarks": ["Customer Delay"]
+},
+{
+"Code": "PUC",
+"Remarks": ["Picked up"]
+},
+{                                                          
+"Code": "CLI",
+"Remarks": ["Courier Lost initiated"]
+},
+{
+"Code": "RRBS",
+"Remarks": ["RETURN_RECEIVED_BY_SELLER"]
+},
+{
+"Code": "NC",
+"Remarks": ["NON-CONNECT"]
+},{
+"Code": "IN_TRANS",
+"Remarks": ["IN_TRANSIT"]
+},
+{
+"Code": "CCAN",
+"Remarks": ["CUSTOMER CANCELLED"]
+},
+{
+"Code": "RPR",
+"Remarks": ["Reverse Product Received"]
+},
+{
+"Code": "RPI",
+"Remarks": ["Reverse Pickup Initiated"]
+},
+{
+"Code": "CRFD",
+"Remarks": ["Pick up Refused by Customer"]
+},
+{
+"Code": "OUT_DEL",
+"Remarks": ["OUT FOR DELIVERY"]
+},
+{
+"Code": "CNA",
+"Remarks": ["COURIER NOT ATTEMPTED"]
+}
+],
+
+"remarks": [
+"It gives a specific code (which has some specific meaning related to the package journey) which in returns tells us about the status of the returned item. "
+]    
+},
+    {
+      "column_name": "shipping_provider_code",
+      "description": "Identifies the shipping provider (e.g., UPS, FedEx) by a unique code used to track which company is responsible for the delivery of the package.",
+"Remarks":[
+"It is the code that shows which company is assigned in the return journey of the requested package."
+]
+
+    },
+    {
+      "column_name": "returns_center_code",
+      "description": "If the package is returned, this code indicates which returns center is handling it, which is useful for managing returns and exchanges."
+    },
+    {
+      "column_name": "created",
+      "description": "A timestamp detailing when the record was first created, providing a chronological order of entries."
+    },
+    {
+      "column_name": "updated",
+      "description": "A timestamp of the most recent update made to the record, helping track changes over time."
+    },
+    {
+      "column_name": "reschedule_count",
+      "description": "Tracks how many times the pickup or delivery of the package has been rescheduled, indicating potential issues or customer preferences."
+    },
+    {
+      "column_name": "pref_pickup_slot",
+      "description": "A more detailed indication of the preferred pickup time, potentially combining date and hour for precise scheduling."
+    },
+    {
+      "column_name": "is_dsqc_done",
+      "description": "A boolean flag indicates whether a specific quality control check (DSQC) has been completed, ensuring package integrity."
+    },
+    {
+      "column_name": "status_date",
+      "description": "The date on which the current status was applied helps track progress and delays. It is an important column as it tells about when the status was updated on the returned package.",
+"Remarks":[
+"It is the important column as it tells about when the status was updated on the returned package."
+]
+
+    }
+  ]
+}
+
+]
+}
     ]
 }
