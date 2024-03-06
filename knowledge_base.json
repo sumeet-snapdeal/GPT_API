@@ -891,6 +891,98 @@
 }
 
 ]
+},
+{
+"db_name": "dwh",
+"tables": [
+{
+"table_name":"f_suborders_oms_vw",
+"table_definition": "This is a view that contains data for only verified suborders. This is an important table that provides mapping for the suborder and ims_user_id (user id) and soi_shipping_package_id which is used to check further shipping-related details in the shipping tables for the suborder. This table contains only verified suborders, so when asked to find the number of suborders booked on a specific day this table should not be used as a primary table.",
+  "columns": [
+    {
+      "column_name": "ims_user_id",
+      "definition": "All the users are mapped with an ims_user_id in the database. This field indirectly gives the identification for the user who has placed the order.",
+      "remarks": ["This key can be used when asked to count the number of suborders per user or for a specific user."]
+    },
+    {
+      "column_name": "order_code",
+      "definition": "A unique identifier for the order in the database. It can be used when someone asks for details regarding the order code.",
+      "remarks": [
+        "order_code is a primary key that is created when an order is generated in a system.",
+        "This can be used with JOIN condition on oms.sale_order_vw.",
+        "For Reference: oms.sale_order_vw so JOIN dwh.f_suborders_oms_vw fso on so.code = fso.order_code"
+      ]
+    },
+    {
+      "column_name": "sd_city",
+      "definition": "The name of the city entered as part of the shipping address for an order."
+    },
+    {
+      "column_name": "sd_pincode",
+      "definition": "The postal code is associated with the shipping destination of an order."
+    },
+    {
+      "column_name": "sd_state",
+      "definition": "The state, province, or region for the shipping destination."
+    },
+    {
+      "column_name": "shipping_provider_sid",
+      "definition": "The unique system identifier for the shipping provider or courier company responsible for delivering the order. This ID can be used to join with other tables that contain detailed information about the shipping providers.",
+      "Remarks":[
+"This column is used to join with the table cg. It is used to know the further journey when the order is shipped.",
+"For Reference : dwh.f_suborders_oms_vw fso JOIN analytics_logistics.courier_Group cg on cg.shipping_provider_sid = fso.shipping_provider_sid"
+]
+    },
+    {
+      "column_name": "snapcash",
+      "definition": "It could represent the amount of 'snapcash' (a digital currency that is used on the platform) used or credited in a transaction."
+    },
+    {
+      "column_name": "soi_shipping_package_id",
+      "definition": "Stands for 'Suborder Item Shipping Package ID'. This ID helps to track the package throughout the shipping process and is essential for inventory control and customer service inquiries.",
+      "remarks": [
+        "This column is used to join with table dwh.f_shipping_package_vw (alias - fsp).",
+        "For Reference: dwh.f_suborders_oms_vw fso JOIN dwh.f_shipping_package_vw on fso.soi_shipping_package_id = fsp.sp_shipping_package_id"
+      ]
+    },
+    {
+      "column_name": "subo_date_created",
+      "definition": "The timestamp of when the suborder was initially entered into the system.",
+"Remarks": [" Convert this field in YYYY-MM-DD format using to_date(subo_date_created::varchar'YYYYMMDD')."
+]
+    },
+    {
+      "column_name": "subo_date_delivered",
+      "definition": "The date on which the suborder is delivered to the customer.",
+"Remarks": [" Convert this field in YYYY-MM-DD format using to_date(subo_date_delivered::varchar'YYYYMMDD')."
+]
+    },
+    {
+      "column_name": "subo_date_verified",
+      "definition": "This field contains the date at which the suborder was verified in the system.", 
+"Remarks": ["Convert this field in YYYY-MM-DD format using to_date(subo_date_verified::varchar'YYYYMMDD')."
+]
+    },
+    {
+      "column_name": "suborder_code",
+      "definition": "This column stores a unique identifier for a suborder in contexts where orders can be broken down into smaller parts (suborders) each with specific tracking and management needs. This column is used as a Foreign Key for suborder details.",
+      "remarks": [
+        "Used for joining with more tables which contains suborder_code field in themselves.",
+        "For Reference: oms.suborder subo JOIN dwh.f_suborders_oms_vw fso on fso.suborder_code = subo.code"
+      ]
+    },
+    {
+      "column_name": "product_sid",
+      "definition": "System identifier for the product unique across the database for referencing the product in system-level operations.",
+      "remarks": [
+        "Used to join with table dwh.d_product.",
+        "For reference: dwh.d_product dp1 on dp1.product_sid=fso.product_sid"
+      ]
+    }
+  ]
+}
+
+]
 }
     ]
 }
