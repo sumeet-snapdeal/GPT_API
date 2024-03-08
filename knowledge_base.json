@@ -95,7 +95,7 @@
             "tables": [
                 {
                     "table_name": "rto_basedata_ys_v4",
-                    "table_definition": "It contains data related to UD(undelivered), and RTO suborders. This table is used after the suborders are OFD(out for delivery).",
+                    "table_definition": "It contains data related to UD(undelivered) reasons. This table is used after the suborders are OFD(out for delivery).",
                     "columns": [
                         {
                             "column_name": "status_date",
